@@ -36,8 +36,8 @@ def get_latest_webdata(list):
     page_data = urllib.request.urlopen(gpu_list).read().decode("utf-8")
     soup = BeautifulSoup(page_data, 'html.parser')
     is_present = soup.find_all('div', attrs={'class': 'item-cell'})
-    is_bot_found = soup.find('div', attrs={'class': 'lds-ripple'})
-    if is_bot_found == None:
+    is_bot_found = soup.find('div', attrs={'class': 'lds-ripple'})        
+    if is_bot_found != None:
         print("bot found")
     for n in is_present:
         item_data = soup.find('p', attrs={'class': 'item-promo'})
@@ -48,7 +48,8 @@ def get_latest_webdata(list):
         else:
             current_time = time.strftime("%H:%M:%S", time.localtime())
             print(f"still out of stock at {current_time}")
-    time.sleep(randint(30,100))
 
 while True:
     get_latest_webdata(gpu_list)
+    #time.sleep(5)
+    time.sleep(randint(30,100))
